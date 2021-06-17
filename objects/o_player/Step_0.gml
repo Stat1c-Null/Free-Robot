@@ -1,9 +1,9 @@
 /// @description Movement
 //Key Inputs
-var key_left = keyboard_check(vk_left) or keyboard_check(ord("A"))
-var key_right = keyboard_check(vk_right) or keyboard_check(ord("D"))
-var key_down = keyboard_check(vk_down) or keyboard_check(ord("S"))
-var key_up = keyboard_check(vk_up) or keyboard_check(ord("W"))
+key_left = keyboard_check(vk_left) or keyboard_check(ord("A"))
+key_right = keyboard_check(vk_right) or keyboard_check(ord("D"))
+key_down = keyboard_check(vk_down) or keyboard_check(ord("S"))
+key_up = keyboard_check(vk_up) or keyboard_check(ord("W"))
 var key_jump = keyboard_check_pressed(vk_space) or keyboard_check_pressed(ord("W"))
 var key_dash = keyboard_check_pressed(vk_shift)
 var key_hook = mouse_check_button_pressed(mb_left)
@@ -15,12 +15,18 @@ switch (state)
 		#region MOVEMENT
 			//Calculate movement
 			var move = key_right - key_left//Movement direction
+			var ground_accel = .1
+			var ground_deccel = .12
 
 			//Horizontal Movement
 			//Move as long as player doesnt dash
-			if(is_dashing == false and wall_jump_delay == 0) {
-				hsp = move * walk_speed
+			if(is_dashing == false and wall_jump_delay == 0 and onground) {
+				acceleration(ground_accel, ground_deccel, walk_speed)	
+			} else {
+				// In air
+				acceleration(ground_accel, ground_deccel, walk_speed/2)
 			}
+
 		#endregion
 
 		#region JUMPING
@@ -107,8 +113,10 @@ switch (state)
 		#region HOOK
 		//Check if we are clicking mouse
 		if(key_hook){
-			//Check if player is trying to grapple with a wall
-			if(place_meeting(mouse_x, mouse_y, o_wall))
+			//Find distance between player and place they want to grapple on
+			dist = point_distance(o_player.x, o_player.y, mouse_x, mouse_y)
+			//Check if player is trying to grapple with a wall and their arent too far away
+			if(place_meeting(mouse_x, mouse_y, o_wall) and (dist < distance_toHook))
 			{
 				grappleX = mouse_x
 				grappleY = mouse_y
