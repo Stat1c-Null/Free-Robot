@@ -13,6 +13,14 @@ switch (state)
 	case pState.normal: 
 	{
 		#region MOVEMENT
+			//Dont let stamina go over board
+			if(global.phealth > global.phealth_max){
+				global.phealth = global.phealth_max	
+			}
+			if (global.phealth < 0)
+			{
+				global.phealth = 0	
+			}
 			//Calculate movement
 			var move = key_right - key_left//Movement direction
 			var ground_accel = .1
@@ -37,18 +45,29 @@ switch (state)
 			} else {
 				vsp = 0	
 			}
+			
+			//Dont let stamina go over board
+			if(global.jump_stamina > global.jump_stamina_max){
+				global.jump_stamina = global.jump_stamina_max	
+			}
+			if (global.jump_stamina < 0)
+			{
+				global.jump_stamina = 0	
+			}
 
 			//Jump
-			if(place_meeting(x, y+1, o_wall) and (key_jump) and jump_current > 0 and is_dashing == false)
+			if(place_meeting(x, y+1, o_wall) and (key_jump) and jump_current > 0 and is_dashing == false and global.jump_stamina > 0)
 			{
 				//Subtract jump speed from vertical speed because gamemaker is retarded and goes up y axis only if numbers are negative
 				vsp -= jumpspd
 				jump_current -= 1
+				global.jump_stamina -= 1
 			} else {
 				//In the air
-				if (key_jump) and jump_current > 0 {
+				if (key_jump) and jump_current > 0 and global.jump_stamina > 0{
 					vsp -= jumpspd
 					jump_current -= 1
+					global.jump_stamina -= 1
 				}
 			}
 
@@ -91,9 +110,19 @@ switch (state)
 		#endregion
 
 		#region DASH
+		
+		//Dont let stamina go over board
+		if(global.dash_stamina > global.dash_stamina_max){
+			global.dash_stamina = global.dash_stamina_max	
+		}
+		if (global.dash_stamina < 0)
+		{
+			global.dash_stamina = 0	
+		}
 		//Dash
-		if(key_dash and is_dashing == false) {
+		if(key_dash and is_dashing == false and global.dash_stamina > 0) {
 			is_dashing = true
+			global.dash_stamina -= 1
 			alarm[0] = room_speed / 3//Dash Duration Alarm
 	
 			//Get direction of dash
@@ -111,8 +140,17 @@ switch (state)
 		#endregion DASH
 		
 		#region HOOK
+		//Dont let stamina go over board
+		if(global.hook_stamina > global.hook_stamina_max){
+			global.hook_stamina = global.hook_stamina_max	
+		}
+		if (global.hook_stamina < 0)
+		{
+			global.hook_stamina = 0	
+		}
 		//Check if we are clicking mouse
-		if(key_hook){
+		if(key_hook and global.hook_stamina > 0){
+			global.hook_stamina -= 1
 			//Find distance between player and place they want to grapple on
 			dist = point_distance(o_player.x, o_player.y, mouse_x, mouse_y)
 			//Check if player is trying to grapple with a wall and their arent too far away

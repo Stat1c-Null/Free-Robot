@@ -7,9 +7,18 @@ grv = 0.5
 walk_speed = 10
 state = pState.normal
 
+//Stamina
+global.phealth = 100
+global.phealth_max = 100
+global.jump_stamina = 12
+global.jump_stamina_max = 12
+global.dash_stamina = 10
+global.dash_stamina_max = 10
+global.hook_stamina = 7
+global.hook_stamina_max = 7
 
 //Jumping
-jumpspd = 12
+jumpspd = 14
 jump_max = 3
 jump_current = jump_max
 
@@ -18,8 +27,8 @@ onground = false
 onwall = 0
 dust = 0
 grv_wall = 0.2//Gravity when player is on the wall
-hsp_wall_jump = 9//Speed at which we jump away from the wall horizontally
-vsp_wall_jump = -9
+hsp_wall_jump = 12//Speed at which we jump away from the wall horizontally
+vsp_wall_jump = -12
 wall_jump_delay = 0//dont allow player to jump up one wall
 wall_jump_delay_max = 17
 
