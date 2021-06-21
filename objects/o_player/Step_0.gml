@@ -7,7 +7,8 @@ key_up = keyboard_check(vk_up) or keyboard_check(ord("W"))
 var key_jump = keyboard_check_pressed(vk_space) or keyboard_check_pressed(ord("W"))
 var key_dash = keyboard_check_pressed(vk_shift)
 var key_hook = mouse_check_button_pressed(mb_left)
-
+onwall = place_meeting(x+1, y, o_wall) - place_meeting(x-1, y, o_wall)
+onground = place_meeting(x, y+1, o_wall)
 switch (state)
 {
 	case pState.normal: 
@@ -25,15 +26,32 @@ switch (state)
 			var move = key_right - key_left//Movement direction
 			var ground_accel = .1
 			var ground_deccel = .12
-
+			
+			
 			//Horizontal Movement
 			//Move as long as player doesnt dash
 			if(is_dashing == false and wall_jump_delay == 0 and onground) {
-				acceleration(ground_accel, ground_deccel, walk_speed)	
+				acceleration(ground_accel, ground_deccel, walk_speed)
+				image_speed = 1
+				if (not pressingKeys()) { // Idle sprite
+					sprite_index = s_player_idle
+				} else {//Running sprite
+					sprite_index = s_player_running
+				}
+				FlipImage()
 			} else {
 				// In air
 				acceleration(ground_accel, ground_deccel, walk_speed/2)
 			}
+			
+			//Push away from the wall
+			if(onground and onwall != 0 and key_right)
+			{
+				hsp += walk_speed/2
+			} else if(onground and onwall != 0 and key_left) {
+				hsp -= walk_speed/2	
+			}
+			
 
 		#endregion
 
@@ -54,27 +72,39 @@ switch (state)
 			{
 				global.jump_stamina = 0	
 			}
-
 			//Jump
-			if(place_meeting(x, y+1, o_wall) and (key_jump) and jump_current > 0 and is_dashing == false and global.jump_stamina > 0)
+			if(place_meeting(x, y+1, o_wall) and (key_jump) and jump_current > 0 and is_dashing == false)
 			{
 				//Subtract jump speed from vertical speed because gamemaker is retarded and goes up y axis only if numbers are negative
 				vsp -= jumpspd
 				jump_current -= 1
-				global.jump_stamina -= 1
 			} else {
 				//In the air
 				if (key_jump) and jump_current > 0 and global.jump_stamina > 0{
 					vsp -= jumpspd
 					jump_current -= 1
 					global.jump_stamina -= 1
+					//Animate Jump
+					sprite_index = s_player_jump
+					image_speed = 1.1
 				}
 			}
 
 			//Wall Jump
-			onground = place_meeting(x, y+1, o_wall)
-			onwall = place_meeting(x+1, y, o_wall) - place_meeting(x-1, y, o_wall)
 			wall_jump_delay = max(wall_jump_delay - 1, 0)
+			//Animate first jump
+			if(not onground and vsp < 0 and jump_current == 2)
+			{
+				sprite_index = s_player_jumpstart
+				image_speed = 1
+			}
+			
+			//Falling Down
+			if(not onground and vsp > 0)
+			{
+				sprite_index = s_player_fall
+				FlipImage()
+			}
 			//Actual Wall jump Logic
 			//Check if we are on the wall not on ground and pressing jump key
 			if(onwall != 0 and !onground and key_jump)
@@ -82,14 +112,30 @@ switch (state)
 				wall_jump_delay = wall_jump_delay_max
 				hsp = -onwall * hsp_wall_jump
 				vsp = vsp_wall_jump
+				global.jump_stamina += 1
+				sprite_index = s_player_slide
 			}
 			//Wall Sliding
 			var grv_final = grv
-			if (onwall != 0 and vsp > 0)//If we are on the wall, apply wall gravity
+			if (onwall != 0 and vsp > 0 and !onground)//If we are on the wall, apply wall gravity
 			{
 				grv_final = grv_wall
 				vsp += grv_final
 				vsp = clamp(vsp, -grv_final*7, grv_final*7)
+				sprite_index = s_player_slide
+				image_speed = 0
+				if(onwall == 1){
+					image_xscale = 0.4	
+				} else {
+					image_xscale = -0.4	
+				}
+				if(key_left or key_right){
+					wall_jump_delay = wall_jump_delay_max
+					hsp = -onwall * hsp_wall_jump/2
+					vsp = vsp_wall_jump/2
+					global.jump_stamina += 1
+					sprite_index = s_player_slide
+				}
 			}
 	
 			//Check if we are off the ground and on the wall
@@ -99,7 +145,7 @@ switch (state)
 				if(onwall == 1) side = bbox_right//But if we are on right wall, switch it the right obviously
 				dust++
 				//Create Dust
-				if((dust > 2) and (vsp > 0)) with (instance_create_layer(side, bbox_top, "Behind", o_dust))
+				if((dust > 2) and (vsp > 0)) with (instance_create_layer(side, bbox_top + 10, "Behind", o_dust) and instance_create_layer(side, bbox_bottom + 25, "Behind", o_dust))
 				{
 					other.dust = 0
 					hspeed = other.onwall * 0.5
@@ -107,6 +153,8 @@ switch (state)
 			} else {//If we are off the wall reset dust and turn it off
 				dust = 0	
 			}
+			
+			
 		#endregion
 
 		#region DASH
@@ -122,6 +170,7 @@ switch (state)
 		//Dash
 		if(key_dash and is_dashing == false and global.dash_stamina > 0) {
 			is_dashing = true
+			sprite_index = s_player_dash
 			global.dash_stamina -= 1
 			alarm[0] = room_speed / 3//Dash Duration Alarm
 	
@@ -150,12 +199,13 @@ switch (state)
 		}
 		//Check if we are clicking mouse
 		if(key_hook and global.hook_stamina > 0){
-			global.hook_stamina -= 1
 			//Find distance between player and place they want to grapple on
 			dist = point_distance(o_player.x, o_player.y, mouse_x, mouse_y)
 			//Check if player is trying to grapple with a wall and their arent too far away
 			if(place_meeting(mouse_x, mouse_y, o_wall) and (dist < distance_toHook))
 			{
+				sprite_index = s_player_fall
+				global.hook_stamina -= 1
 				grappleX = mouse_x
 				grappleY = mouse_y
 				ropeX = x
@@ -186,6 +236,7 @@ switch (state)
 		//Apply swinging
 		hsp = ropeX - x
 		vsp = ropeY - y
+		FlipImage()
 		
 		if(keyboard_check_pressed(vk_space))
 		{
