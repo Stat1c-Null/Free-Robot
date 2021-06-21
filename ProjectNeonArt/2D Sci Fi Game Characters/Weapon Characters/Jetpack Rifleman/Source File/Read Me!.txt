@@ -1,0 +1,5 @@
+Jetpack Rifleman and Rifleman Characters both share the same sprites. The source is the same.
+
+Please look inside the Rifleman -> Source File Folder
+
+Thanks
