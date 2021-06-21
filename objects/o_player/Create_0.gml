@@ -19,7 +19,7 @@ global.hook_stamina_max = 7
 
 //Jumping
 jumpspd = 14
-jump_max = 3
+jump_max = 2
 jump_current = jump_max
 
 //Wall Jumps

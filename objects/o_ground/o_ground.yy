@@ -1,10 +1,10 @@
 {
   "spriteId": {
-    "name": "s_wall",
-    "path": "sprites/s_wall/s_wall.yy",
+    "name": "s_ground",
+    "path": "sprites/s_ground/s_ground.yy",
   },
   "solid": false,
-  "visible": false,
+  "visible": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": null,
@@ -24,11 +24,11 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Others",
-    "path": "folders/Objects/Others.yy",
+    "name": "Objects",
+    "path": "folders/Objects/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "o_wall",
+  "name": "o_ground",
   "tags": [],
   "resourceType": "GMObject",
 }

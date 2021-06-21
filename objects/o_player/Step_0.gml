@@ -284,6 +284,8 @@ switch (state)
 			vsp = 0	
 			jump_current = jump_max//Reset jumps ones player landed
 		}
+		
+		
 
 		y += vsp
 #endregion
