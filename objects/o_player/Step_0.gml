@@ -74,11 +74,13 @@ switch (state)
 			}
 			//Jump
 			
-			if(place_meeting(x, y+1, o_jumpthroughplatform) and (key_jump) and jump_current > 0 and is_dashing == false)
+			if(onground and (key_jump) and jump_current > 0 and is_dashing == false)
 			{
 				//Subtract jump speed from vertical speed because gamemaker is retarded and goes up y axis only if numbers are negative
 				vsp -= jumpspd
 				jump_current -= 1
+				sprite_index = s_player_jumpstart
+				image_speed = 1.2
 			} else {
 				//In the air
 				if (key_jump) and jump_current > 0 and global.jump_stamina > 0{
@@ -87,18 +89,13 @@ switch (state)
 					global.jump_stamina -= 1
 					//Animate Jump
 					sprite_index = s_player_jump
-					image_speed = 1.1
+					image_speed = 1
 				}
 			}
 
 			//Wall Jump
 			wall_jump_delay = max(wall_jump_delay - 1, 0)
-			//Animate first jump
-			if(not onground and vsp < 0 and jump_current == 2)
-			{
-				sprite_index = s_player_jumpstart
-				image_speed = 1
-			}
+			
 			
 			//Falling Down
 			if(not onground and vsp > 0)
@@ -125,11 +122,6 @@ switch (state)
 				vsp = clamp(vsp, -grv_final*7, grv_final*7)
 				sprite_index = s_player_slide
 				image_speed = 0
-				if(onwall == 1){
-					image_xscale = 0.4	
-				} else {
-					image_xscale = -0.4	
-				}
 				if(key_left or key_right){
 					wall_jump_delay = wall_jump_delay_max
 					hsp = -onwall * hsp_wall_jump

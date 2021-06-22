@@ -24,16 +24,26 @@ function jump_thr_collisions(argument0){
 	var onPlatform = collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, obj, false, false)
 	
 	if(onPlatform != noone){
-		var notInsidePlatform = !collision_rectangle(bbox_left, bbox_bottom-1, bbox_right, bbox_bottom, onPlatform, false, false) 
+		show_debug_message("Check 1")
+		var notInsidePlatform = !collision_rectangle(bbox_left, bbox_bottom-1, bbox_right, bbox_top, onPlatform, false, false) 
 		if(notInsidePlatform)
 		{
 			//Jump
-		
-			if(place_meeting(x, y+1, o_jumpthroughplatform) and (key_jump) and jump_current > 0 and is_dashing == false)
+			show_debug_message("Check 2")
+			if(place_meeting(x, y+1, obj) and key_jump)
 			{
-				//Subtract jump speed from vertical speed because gamemaker is retarded and goes up y axis only if numbers are negative
+				vsp -= 10
+			}
+			
+		}
+	}
+}
+
+/*	//Subtract jump speed from vertical speed because gamemaker is retarded and goes up y axis only if numbers are negative
 				vsp -= jumpspd
 				jump_current -= 1
+				sprite_index = s_player_jumpstart
+				image_speed = 1
 			} else {
 				//In the air
 				if (key_jump) and jump_current > 0 and global.jump_stamina > 0{
@@ -42,9 +52,8 @@ function jump_thr_collisions(argument0){
 					global.jump_stamina -= 1
 					//Animate Jump
 					sprite_index = s_player_jump
-					image_speed = 1.1
+					image_speed = 1
 				}
 			}
-		}
-	}
-}
+			*/
+			

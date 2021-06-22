@@ -38,7 +38,7 @@
     "spriteId": {"name":"s_player_jumpstart","path":"sprites/s_player_jumpstart/s_player_jumpstart.yy",},
     "timeUnits": 1,
     "playback": 1,
-    "playbackSpeed": 9.0,
+    "playbackSpeed": 3.0,
     "playbackSpeedType": 0,
     "autoRecord": true,
     "volume": 1.0,
