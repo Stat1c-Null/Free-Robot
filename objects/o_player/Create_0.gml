@@ -34,6 +34,8 @@ wall_jump_delay_max = 17
 
 //Dashing
 is_dashing = false
+dash_max = 2
+dash_current = dash_max
 dash_speed = walk_speed * 1.5
 dash_counter = 0
 

@@ -8,7 +8,7 @@ var key_jump = keyboard_check_pressed(vk_space) or keyboard_check_pressed(ord("W
 var key_dash = keyboard_check_pressed(vk_shift)
 var key_hook = mouse_check_button_pressed(mb_left)
 onwall = place_meeting(x+1, y, o_wall) - place_meeting(x-1, y, o_wall)
-onground = place_meeting(x, y+1, o_wall)
+onground = place_meeting(x, y+1, o_wall) or place_meeting(x, y+1, o_jumpthroughplatform)
 switch (state)
 {
 	case pState.normal: 
@@ -73,7 +73,8 @@ switch (state)
 				global.jump_stamina = 0	
 			}
 			//Jump
-			if(place_meeting(x, y+1, o_wall) and (key_jump) and jump_current > 0 and is_dashing == false)
+			
+			if(place_meeting(x, y+1, o_jumpthroughplatform) and (key_jump) and jump_current > 0 and is_dashing == false)
 			{
 				//Subtract jump speed from vertical speed because gamemaker is retarded and goes up y axis only if numbers are negative
 				vsp -= jumpspd
@@ -131,7 +132,7 @@ switch (state)
 				}
 				if(key_left or key_right){
 					wall_jump_delay = wall_jump_delay_max
-					hsp = -onwall * hsp_wall_jump/2
+					hsp = -onwall * hsp_wall_jump
 					vsp = vsp_wall_jump/2
 					global.jump_stamina += 1
 					sprite_index = s_player_slide
@@ -145,10 +146,10 @@ switch (state)
 				if(onwall == 1) side = bbox_right//But if we are on right wall, switch it the right obviously
 				dust++
 				//Create Dust
-				if((dust > 2) and (vsp > 0)) with (instance_create_layer(side, bbox_top + 10, "Behind", o_dust) and instance_create_layer(side, bbox_bottom + 25, "Behind", o_dust))
+				if((dust > 2) and (vsp > 0)) with (instance_create_layer(side, bbox_top + 10, "Behind", o_dust))
 				{
-					other.dust = 0
-					hspeed = other.onwall * 0.5
+						other.dust = 0
+						hspeed = other.onwall * 0.5
 				}
 			} else {//If we are off the wall reset dust and turn it off
 				dust = 0	
@@ -168,8 +169,9 @@ switch (state)
 			global.dash_stamina = 0	
 		}
 		//Dash
-		if(key_dash and is_dashing == false and global.dash_stamina > 0) {
+		if(key_dash and !key_up and is_dashing == false and global.dash_stamina > 0 and dash_current > 0) {
 			is_dashing = true
+			dash_current -= 1
 			sprite_index = s_player_dash
 			global.dash_stamina -= 1
 			alarm[0] = room_speed / 3//Dash Duration Alarm
@@ -178,6 +180,9 @@ switch (state)
 			var horizontal_dir = sign(move)
 	
 			hsp += dash_speed * horizontal_dir
+		}
+		if(onground){
+			dash_current = dash_max	
 		}
 
 		if(is_dashing){
@@ -250,6 +255,8 @@ switch (state)
 }
 
 #region COLLISION
+		//Jump through roofs
+		jump_thr_collisions(o_jumpthroughplatform)
 		//Horizontal Collision
 		if(place_meeting(x+hsp, y, o_wall))
 		{
