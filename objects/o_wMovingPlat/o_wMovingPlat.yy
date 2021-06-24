@@ -1,13 +1,16 @@
 {
   "spriteId": {
-    "name": "s_jumpthroughwall",
-    "path": "sprites/s_jumpthroughwall/s_jumpthroughwall.yy",
+    "name": "s_yMoving",
+    "path": "sprites/s_yMoving/s_yMoving.yy",
   },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "o_jumpthroughplatform",
+    "path": "objects/o_jumpthroughplatform/o_jumpthroughplatform.yy",
+  },
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
@@ -22,7 +25,6 @@
   "physicsShapePoints": [],
   "eventList": [
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":2,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -31,7 +33,7 @@
     "path": "folders/Objects/Platforms.yy",
   },
   "resourceVersion": "1.0",
-  "name": "o_jumpthroughplatform",
+  "name": "o_wMovingPlat",
   "tags": [],
   "resourceType": "GMObject",
 }

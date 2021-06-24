@@ -22,13 +22,12 @@
   "physicsShapePoints": [],
   "eventList": [
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":2,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Platforms",
-    "path": "folders/Objects/Platforms.yy",
+    "name": "Others",
+    "path": "folders/Objects/Others.yy",
   },
   "resourceVersion": "1.0",
   "name": "o_jumpthroughplatform",

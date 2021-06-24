@@ -6,6 +6,7 @@ vsp = 0
 grv = 0.5
 walk_speed = 10
 state = pState.normal
+fullscreen_counter = 0
 
 //Stamina
 global.phealth = 100

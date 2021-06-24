@@ -86,7 +86,9 @@ switch (state)
 				if (key_jump) and jump_current > 0 and global.jump_stamina > 0{
 					vsp -= jumpspd
 					jump_current -= 1
-					global.jump_stamina -= 1
+					if(onwall == 0){
+						global.jump_stamina -= 1
+					}
 					//Animate Jump
 					sprite_index = s_player_jump
 					image_speed = 1
@@ -110,7 +112,6 @@ switch (state)
 				wall_jump_delay = wall_jump_delay_max
 				hsp = -onwall * hsp_wall_jump
 				vsp = vsp_wall_jump
-				global.jump_stamina += 1
 				sprite_index = s_player_slide
 			}
 			//Wall Sliding
@@ -126,7 +127,6 @@ switch (state)
 					wall_jump_delay = wall_jump_delay_max
 					hsp = -onwall * hsp_wall_jump
 					vsp = vsp_wall_jump/2
-					global.jump_stamina += 1
 					sprite_index = s_player_slide
 				}
 			}
@@ -245,6 +245,7 @@ switch (state)
 	}break
 	
 }
+
 
 #region COLLISION
 		//Jump through roofs
