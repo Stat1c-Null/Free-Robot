@@ -9,6 +9,11 @@ var key_dash = keyboard_check_pressed(vk_shift)
 var key_hook = mouse_check_button_pressed(mb_left)
 onwall = place_meeting(x+1, y, o_wall) - place_meeting(x-1, y, o_wall)
 onground = place_meeting(x, y+1, o_wall) or place_meeting(x, y+1, o_jumpthroughplatform)
+if(place_meeting(x, y+1, o_wall)){
+	global.jumpthru = false	
+} else if (place_meeting(x, y+1, o_jumpthroughplatform)){
+	global.jumpthru = true	
+}
 switch (state)
 {
 	case pState.normal: 
@@ -74,7 +79,7 @@ switch (state)
 			}
 			//Jump
 			
-			if(onground and (key_jump) and jump_current > 0 and is_dashing == false)
+			if(global.jumpthru == false and onground and (key_jump) and jump_current > 0 and is_dashing == false)
 			{
 				//Subtract jump speed from vertical speed because gamemaker is retarded and goes up y axis only if numbers are negative
 				vsp -= jumpspd
@@ -83,7 +88,7 @@ switch (state)
 				image_speed = 1.2
 			} else {
 				//In the air
-				if (key_jump) and jump_current > 0 and global.jump_stamina > 0{
+				if (key_jump) and global.jumpthru == false and jump_current > 0 and global.jump_stamina > 0{
 					vsp -= jumpspd
 					jump_current -= 1
 					if(onwall == 0){
@@ -97,7 +102,6 @@ switch (state)
 
 			//Wall Jump
 			wall_jump_delay = max(wall_jump_delay - 1, 0)
-			
 			
 			//Falling Down
 			if(not onground and vsp > 0)
@@ -199,7 +203,7 @@ switch (state)
 			//Find distance between player and place they want to grapple on
 			dist = point_distance(o_player.x, o_player.y, mouse_x, mouse_y)
 			//Check if player is trying to grapple with a wall and their arent too far away
-			if(place_meeting(mouse_x, mouse_y, o_wall) and (dist < distance_toHook))
+			if(place_meeting(mouse_x, mouse_y, o_jumpthroughplatform) and (dist < distance_toHook))
 			{
 				sprite_index = s_player_fall
 				global.hook_stamina -= 1

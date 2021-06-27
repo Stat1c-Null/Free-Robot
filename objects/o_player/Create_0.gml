@@ -17,11 +17,13 @@ global.dash_stamina = 10
 global.dash_stamina_max = 10
 global.hook_stamina = 7
 global.hook_stamina_max = 7
+global.jumpthru = false
 
 //Jumping
 jumpspd = 14
 jump_max = 2
 jump_current = jump_max
+
 
 //Wall Jumps
 onground = false
