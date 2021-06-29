@@ -1,10 +1,10 @@
 {
   "spriteId": {
-    "name": "s_jumpthroughwall",
-    "path": "sprites/s_jumpthroughwall/s_jumpthroughwall.yy",
+    "name": "s_trashcontainer",
+    "path": "sprites/s_trashcontainer/s_trashcontainer.yy",
   },
   "solid": false,
-  "visible": false,
+  "visible": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": null,
@@ -20,18 +20,15 @@
   "physicsStartAwake": true,
   "physicsKinematic": false,
   "physicsShapePoints": [],
-  "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":2,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-  ],
+  "eventList": [],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Platforms",
-    "path": "folders/Objects/Platforms.yy",
+    "name": "Objects",
+    "path": "folders/Objects/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "o_jumpthroughplatform",
+  "name": "o_trashcontainer",
   "tags": [],
   "resourceType": "GMObject",
 }
