@@ -24,8 +24,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Props",
-    "path": "folders/Objects/Objects/Props.yy",
+    "name": "Pipes",
+    "path": "folders/Objects/Objects/Pipes.yy",
   },
   "resourceVersion": "1.0",
   "name": "o_sidewallPipe",

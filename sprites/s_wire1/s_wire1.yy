@@ -69,8 +69,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Props",
-    "path": "folders/Sprites/Props/Props.yy",
+    "name": "Wires",
+    "path": "folders/Sprites/Props/Wires.yy",
   },
   "resourceVersion": "1.0",
   "name": "s_wire1",

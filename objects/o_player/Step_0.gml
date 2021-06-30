@@ -18,6 +18,20 @@ switch (state)
 {
 	case pState.normal: 
 	{
+		#region REGEN
+		if (global.phealth < global.phealth_max) {
+			global.phealth += 0.001
+		}
+		if (global.jump_stamina < global.jump_stamina_max) {
+			global.jump_stamina += 0.009
+		}
+		if (global.dash_stamina < global.dash_stamina_max) {
+			global.dash_stamina += 0.009
+		}
+		if (global.hook_stamina < global.hook_stamina_max) {
+			global.hook_stamina += 0.009
+		}
+		#endregion
 		#region MOVEMENT
 			//Dont let stamina go over board
 			if(global.phealth > global.phealth_max){
@@ -124,14 +138,19 @@ switch (state)
 			{
 				grv_final = grv_wall
 				vsp += grv_final
-				vsp = clamp(vsp, -grv_final*7, grv_final*7)
+				vsp = clamp(vsp, -grv_final*3, grv_final*3)
 				sprite_index = s_player_slide
 				image_speed = 0
-				if(key_left or key_right){
+				if(place_meeting(x-1, y, o_wall) and key_right){
 					wall_jump_delay = wall_jump_delay_max
 					hsp = -onwall * hsp_wall_jump
 					vsp = vsp_wall_jump/2
 					sprite_index = s_player_slide
+				} else if(place_meeting(x+1, y, o_wall) and key_left){
+					wall_jump_delay = wall_jump_delay_max
+					hsp = -onwall * hsp_wall_jump
+					vsp = vsp_wall_jump/2
+					sprite_index = s_player_slide	
 				}
 			}
 	
@@ -203,7 +222,7 @@ switch (state)
 			//Find distance between player and place they want to grapple on
 			dist = point_distance(o_player.x, o_player.y, mouse_x, mouse_y)
 			//Check if player is trying to grapple with a wall and their arent too far away
-			if(place_meeting(mouse_x, mouse_y, o_jumpthroughplatform) and (dist < distance_toHook))
+			if((place_meeting(mouse_x, mouse_y, o_jumpthroughplatform) or place_meeting(mouse_x, mouse_y, o_wall)) and (dist < distance_toHook))
 			{
 				sprite_index = s_player_fall
 				global.hook_stamina -= 1
@@ -252,6 +271,11 @@ switch (state)
 
 
 #region COLLISION
+		//Collision with spikes
+		if(place_meeting(x, y+1, o_spikes)){
+			o_player.x = start_x
+			o_player.y = start_y
+		}
 		//Jump through roofs
 		jump_thr_collisions(o_jumpthroughplatform)
 		//Horizontal Collision

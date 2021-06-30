@@ -69,8 +69,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Props",
-    "path": "folders/Sprites/Props/Props.yy",
+    "name": "Pipes",
+    "path": "folders/Sprites/Props/Pipes.yy",
   },
   "resourceVersion": "1.0",
   "name": "s_pipe",
