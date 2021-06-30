@@ -69,8 +69,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Props",
-    "path": "folders/Sprites/Props.yy",
+    "name": "Buildings",
+    "path": "folders/Sprites/Props/Buildings.yy",
   },
   "resourceVersion": "1.0",
   "name": "s_building1",

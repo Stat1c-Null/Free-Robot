@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "s_fence",
-    "path": "sprites/s_fence/s_fence.yy",
+    "name": "s_building_type1",
+    "path": "sprites/s_building_type1/s_building_type1.yy",
   },
   "solid": false,
   "visible": true,
@@ -24,11 +24,11 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Props",
-    "path": "folders/Objects/Objects/Props.yy",
+    "name": "Buildings",
+    "path": "folders/Objects/Objects/Buildings.yy",
   },
   "resourceVersion": "1.0",
-  "name": "o_fence",
+  "name": "o_building2",
   "tags": [],
   "resourceType": "GMObject",
 }

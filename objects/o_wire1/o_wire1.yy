@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "s_fence",
-    "path": "sprites/s_fence/s_fence.yy",
+    "name": "s_wire1",
+    "path": "sprites/s_wire1/s_wire1.yy",
   },
   "solid": false,
   "visible": true,
@@ -28,7 +28,7 @@
     "path": "folders/Objects/Objects/Props.yy",
   },
   "resourceVersion": "1.0",
-  "name": "o_fence",
+  "name": "o_wire1",
   "tags": [],
   "resourceType": "GMObject",
 }

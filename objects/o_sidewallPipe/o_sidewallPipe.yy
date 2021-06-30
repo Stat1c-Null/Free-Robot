@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "s_fence",
-    "path": "sprites/s_fence/s_fence.yy",
+    "name": "s_pipe",
+    "path": "sprites/s_pipe/s_pipe.yy",
   },
   "solid": false,
   "visible": true,
@@ -28,7 +28,7 @@
     "path": "folders/Objects/Objects/Props.yy",
   },
   "resourceVersion": "1.0",
-  "name": "o_fence",
+  "name": "o_sidewallPipe",
   "tags": [],
   "resourceType": "GMObject",
 }

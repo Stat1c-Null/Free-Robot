@@ -70,7 +70,7 @@
   "nineSlice": null,
   "parent": {
     "name": "Props",
-    "path": "folders/Sprites/Props.yy",
+    "path": "folders/Sprites/Props/Props.yy",
   },
   "resourceVersion": "1.0",
   "name": "s_fence",
