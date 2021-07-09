@@ -278,6 +278,10 @@ switch (state)
 		}
 		//Jump through roofs
 		jump_thr_collisions(o_jumpthroughplatform)
+		//Push player out of the platform if his in it
+		if (place_meeting(x, y, o_jumpthroughplatform)) {
+			y -= 1
+		}
 		//Horizontal Collision
 		if(place_meeting(x+hsp, y, o_wall))
 		{
