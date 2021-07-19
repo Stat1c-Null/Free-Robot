@@ -53,7 +53,7 @@
     "spriteId": {"name":"s_player_jump","path":"sprites/s_player_jump/s_player_jump.yy",},
     "timeUnits": 1,
     "playback": 1,
-    "playbackSpeed": 8.0,
+    "playbackSpeed": 12.0,
     "playbackSpeedType": 0,
     "autoRecord": true,
     "volume": 1.0,
