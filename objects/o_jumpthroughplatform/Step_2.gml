@@ -4,8 +4,9 @@ switch(object_index){
 	case o_hMovingPlat:
 	
 		#region platform movement
-			_hspd = _platDir * _moveSpeed
+			_hspd = _platDir * _moveSpeed * 3
 			var wallCollision = place_meeting(x + _hspd, y, o_wall)
+			
 			if(wallCollision){
 				_platDir *= -1
 			}
@@ -45,4 +46,52 @@ switch(object_index){
 		y += _vspd
 	
 		break;
+		
+	case o_skytrain_head:
+	
+		#region platform movement
+			_hspd = _platDir * _moveSpeed
+			var wallCollision = place_meeting(x + _hspd, y, o_wall)
+			
+			if(wallCollision){
+				_platDir *= -1
+			}
+		#endregion
+		
+		#region move player with platform
+			with(o_player){
+				if(not place_meeting(x + other._hspd, y, o_wall)){
+					if(place_meeting(x, y+1, other)){
+						x += other._hspd
+					}
+				}
+			}
+		#endregion
+		x += _hspd
+		break;
+		
+	case o_skytrain_tail:
+	
+		#region platform movement
+			_hspd = _platDir * _moveSpeed
+			var wallCollision = place_meeting(x + _hspd, y, o_wall)
+			
+			if(wallCollision){
+				_platDir *= -1
+			}
+		#endregion
+		
+		#region move player with platform
+			with(o_player){
+				if(not place_meeting(x + other._hspd, y, o_wall)){
+					if(place_meeting(x, y+1, other)){
+						x += other._hspd
+					}
+				}
+			}
+		#endregion
+		x += _hspd
+		break;
+		
 }
+

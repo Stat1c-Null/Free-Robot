@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "s_hMoving",
-    "path": "sprites/s_hMoving/s_hMoving.yy",
+    "name": "s_trainbody",
+    "path": "sprites/s_trainbody/s_trainbody.yy",
   },
   "solid": false,
   "visible": true,

@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "s_yMoving",
-    "path": "sprites/s_yMoving/s_yMoving.yy",
+    "name": "s_elevator",
+    "path": "sprites/s_elevator/s_elevator.yy",
   },
   "solid": false,
   "visible": true,

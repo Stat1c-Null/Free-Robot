@@ -1,10 +1,13 @@
 
 function FlipImage(){
+	global.scale = 0.4
 	//Flip Image
 	if(key_right)
 	{
-		image_xscale = 0.4
+		global.scale = 0.4
+		image_xscale = global.scale
 	} else if(key_left) {
-		image_xscale = -0.4
+		global.scale = -0.4
+		image_xscale = global.scale
 	}
 }

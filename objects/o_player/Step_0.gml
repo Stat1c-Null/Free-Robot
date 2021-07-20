@@ -1,27 +1,25 @@
 /// @description Movement
 //Key Inputs
-key_left = keyboard_check(vk_left) or keyboard_check(ord("A"))
-key_right = keyboard_check(vk_right) or keyboard_check(ord("D"))
-key_down = keyboard_check(vk_down) or keyboard_check(ord("S"))
-key_up = keyboard_check(vk_up) or keyboard_check(ord("W"))
-var key_jump = keyboard_check_pressed(vk_space) or keyboard_check_pressed(ord("W"))
+key_left = keyboard_check(ord("A"))
+key_right = keyboard_check(ord("D"))
+key_down = keyboard_check(ord("S"))
+key_up = keyboard_check(ord("W"))
+var key_jump = keyboard_check_pressed(ord("W"))
 var key_dash = keyboard_check_pressed(vk_shift)
 var key_hook = mouse_check_button_pressed(mb_left)
+global.key_use = keyboard_check_pressed(ord("E"))
 onwall = place_meeting(x+1, y, o_wall) - place_meeting(x-1, y, o_wall)
-onground = place_meeting(x, y+1, o_wall)
+onground = place_meeting(x, y+1, o_wall) or place_meeting(x, y+1, o_jumpthroughplatform)
+if(place_meeting(x, y+1, o_wall)){
+	global.jumpthru = false	
+} else if (place_meeting(x, y+1, o_jumpthroughplatform)){
+	global.jumpthru = true	
+}
 switch (state)
 {
 	case pState.normal: 
 	{
 		#region MOVEMENT
-			//Dont let stamina go over board
-			if(global.phealth > global.phealth_max){
-				global.phealth = global.phealth_max	
-			}
-			if (global.phealth < 0)
-			{
-				global.phealth = 0	
-			}
 			//Calculate movement
 			var move = key_right - key_left//Movement direction
 			var ground_accel = .1
@@ -73,31 +71,30 @@ switch (state)
 				global.jump_stamina = 0	
 			}
 			//Jump
-			if(place_meeting(x, y+1, o_wall) and (key_jump) and jump_current > 0 and is_dashing == false)
+			
+			if(global.jumpthru == false and onground and (key_jump) and jump_current > 0 and is_dashing == false)
 			{
 				//Subtract jump speed from vertical speed because gamemaker is retarded and goes up y axis only if numbers are negative
 				vsp -= jumpspd
 				jump_current -= 1
+				sprite_index = s_player_jumpstart
+				image_speed = 1.2
 			} else {
 				//In the air
-				if (key_jump) and jump_current > 0 and global.jump_stamina > 0{
+				if (key_jump) and global.jumpthru == false and jump_current > 0 and global.jump_stamina > 0{
 					vsp -= jumpspd
 					jump_current -= 1
-					global.jump_stamina -= 1
+					if(onwall == 0){
+						global.jump_stamina -= 1
+					}
 					//Animate Jump
 					sprite_index = s_player_jump
-					image_speed = 1.1
+					image_speed = 1
 				}
 			}
 
 			//Wall Jump
 			wall_jump_delay = max(wall_jump_delay - 1, 0)
-			//Animate first jump
-			if(not onground and vsp < 0 and jump_current == 2)
-			{
-				sprite_index = s_player_jumpstart
-				image_speed = 1
-			}
 			
 			//Falling Down
 			if(not onground and vsp > 0)
@@ -112,7 +109,6 @@ switch (state)
 				wall_jump_delay = wall_jump_delay_max
 				hsp = -onwall * hsp_wall_jump
 				vsp = vsp_wall_jump
-				global.jump_stamina += 1
 				sprite_index = s_player_slide
 			}
 			//Wall Sliding
@@ -121,20 +117,19 @@ switch (state)
 			{
 				grv_final = grv_wall
 				vsp += grv_final
-				vsp = clamp(vsp, -grv_final*7, grv_final*7)
+				vsp = clamp(vsp, -grv_final*3, grv_final*3)
 				sprite_index = s_player_slide
 				image_speed = 0
-				if(onwall == 1){
-					image_xscale = 0.4	
-				} else {
-					image_xscale = -0.4	
-				}
-				if(key_left or key_right){
+				if(place_meeting(x-1, y, o_wall) and key_right){
 					wall_jump_delay = wall_jump_delay_max
-					hsp = -onwall * hsp_wall_jump/2
+					hsp = -onwall * hsp_wall_jump
 					vsp = vsp_wall_jump/2
-					global.jump_stamina += 1
 					sprite_index = s_player_slide
+				} else if(place_meeting(x+1, y, o_wall) and key_left){
+					wall_jump_delay = wall_jump_delay_max
+					hsp = -onwall * hsp_wall_jump
+					vsp = vsp_wall_jump/2
+					sprite_index = s_player_slide	
 				}
 			}
 	
@@ -145,10 +140,10 @@ switch (state)
 				if(onwall == 1) side = bbox_right//But if we are on right wall, switch it the right obviously
 				dust++
 				//Create Dust
-				if((dust > 2) and (vsp > 0)) with (instance_create_layer(side, bbox_top + 10, "Behind", o_dust) and instance_create_layer(side, bbox_bottom + 25, "Behind", o_dust))
+				if((dust > 2) and (vsp > 0)) with (instance_create_layer(side, bbox_top + 10, "Behind", o_dust))
 				{
-					other.dust = 0
-					hspeed = other.onwall * 0.5
+						other.dust = 0
+						hspeed = other.onwall * 0.5
 				}
 			} else {//If we are off the wall reset dust and turn it off
 				dust = 0	
@@ -168,8 +163,9 @@ switch (state)
 			global.dash_stamina = 0	
 		}
 		//Dash
-		if(key_dash and is_dashing == false and global.dash_stamina > 0) {
+		if(key_dash and !key_up and is_dashing == false and global.dash_stamina > 0 and dash_current > 0) {
 			is_dashing = true
+			dash_current -= 1
 			sprite_index = s_player_dash
 			global.dash_stamina -= 1
 			alarm[0] = room_speed / 3//Dash Duration Alarm
@@ -178,6 +174,9 @@ switch (state)
 			var horizontal_dir = sign(move)
 	
 			hsp += dash_speed * horizontal_dir
+		}
+		if(onground){
+			dash_current = dash_max	
 		}
 
 		if(is_dashing){
@@ -202,7 +201,7 @@ switch (state)
 			//Find distance between player and place they want to grapple on
 			dist = point_distance(o_player.x, o_player.y, mouse_x, mouse_y)
 			//Check if player is trying to grapple with a wall and their arent too far away
-			if(place_meeting(mouse_x, mouse_y, o_wall) and (dist < distance_toHook))
+			if((place_meeting(mouse_x, mouse_y, o_jumpthroughplatform) or place_meeting(mouse_x, mouse_y, o_wall)) and (dist < distance_toHook))
 			{
 				sprite_index = s_player_fall
 				global.hook_stamina -= 1
@@ -249,7 +248,14 @@ switch (state)
 	
 }
 
+
 #region COLLISION
+		//Jump through roofs
+		jump_thr_collisions(o_jumpthroughplatform)
+		//Push player out of the platform if his in it
+		//if (place_meeting(x, y, o_jumpthroughplatform)) {
+		//	y -= 1
+		//}
 		//Horizontal Collision
 		if(place_meeting(x+hsp, y, o_wall))
 		{
@@ -284,6 +290,8 @@ switch (state)
 			vsp = 0	
 			jump_current = jump_max//Reset jumps ones player landed
 		}
+		
+		
 
 		y += vsp
 #endregion
