@@ -6,15 +6,16 @@ vsp = 0
 grv = 0.5
 walk_speed = 12
 state = pState.normal
+hooked = false
 
 //Stamina
-global.phealth = 50
+global.phealth = 80
 global.phealth_max = 100
-global.jump_stamina = 8
+global.jump_stamina = 12
 global.jump_stamina_max = 12
-global.dash_stamina = 8
+global.dash_stamina = 10
 global.dash_stamina_max = 10
-global.hook_stamina = 5
+global.hook_stamina = 7
 global.hook_stamina_max = 7
 global.jumpthru = false
 

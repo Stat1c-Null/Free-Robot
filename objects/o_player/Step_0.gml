@@ -204,6 +204,7 @@ switch (state)
 			if((place_meeting(mouse_x, mouse_y, o_jumpthroughplatform) or place_meeting(mouse_x, mouse_y, o_wall)) and (dist < distance_toHook))
 			{
 				sprite_index = s_player_fall
+				show_debug_message("Test")
 				global.hook_stamina -= 1
 				grappleX = mouse_x
 				grappleY = mouse_y
@@ -213,18 +214,25 @@ switch (state)
 				ropeAngle = point_direction(grappleX, grappleY, x, y)//Angle of swing
 				ropeLength = point_distance(grappleX, grappleY, x, y)
 				state = pState.swing
-			}
+			} 
 		}
 		#endregion
 	} break
 	//Swinging on the hook
 	case pState.swing:
 	{
+		hooked = true
 		var ropeAngleAcceleration = -0.2 * dcos(ropeAngle)//Calculate how much to swing
 		
 		ropeAngleAcceleration += (key_right - key_left) * swing_move_acceleration//Let player swing left and right
 		ropeLength += (key_down - key_up) * 2//Allow player to go up and down the rope
 		ropeLength = max(ropeLength, 5)
+		
+		if (place_meeting(grappleX, grappleY, o_vMovingPlat)) {
+			grappleY += o_vMovingPlat._vspd
+		} else if (place_meeting(grappleX, grappleY, o_hMovingPlat)) {
+			grappleX += o_hMovingPlat._hspd
+		}
 		
 		ropeAngleVelocity += ropeAngleAcceleration
 		ropeAngle += ropeAngleVelocity
@@ -241,6 +249,7 @@ switch (state)
 		{
 			state = pState.normal	
 			vsp += grv
+			hooked = false
 		}
 		
 		

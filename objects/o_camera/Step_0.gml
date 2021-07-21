@@ -12,13 +12,23 @@ y += (yTo - y)/25
 
 
 
-if(follow != noone)
-{
-	//Set camera take x and y position of player as position to move to
+//Set camera take x and y position of player as position to move to
+
+if(follow != noone) {
 	xTo = follow.x
 	yTo = follow.y
 }
+/*distance_to_player = point_distance(o_player.x, o_player.y, mouse_x, mouse_y)
+if(distance_to_player < 900)
+{
+	xTo = mouse_x
+	yTo = mouse_y
+} else if(distance_to_player > 900) {
+	xTo = o_player.x
+	yTo = o_player.y
+}
 
+*/
 
 //Dont let camera move outside of the level view
 x = clamp(x, 1980/2, room_width-(1980/2))

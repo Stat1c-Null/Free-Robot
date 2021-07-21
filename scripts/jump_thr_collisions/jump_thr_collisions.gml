@@ -6,7 +6,7 @@ function jump_thr_collisions(argument0){
 	with(argument0){
 		if(other.vsp > 0)
 		{
-			if(place_meeting(x, y-other.vsp, other) and place_meeting(x, y, other))
+			if(place_meeting(x, y-other.vsp, other) and place_meeting(x, y, other) and o_player.hooked == false)
 			{
 				while(!place_meeting(x, y-1, other))
 				{
@@ -16,7 +16,7 @@ function jump_thr_collisions(argument0){
 			}
 		}
 	}
-	
+	//Jumping
 	if(place_meeting(x,y+1, o_jumpthroughplatform) and (key_jump) and global.jumpthru == true){
 		vsp -= jumpspd
 		jump_current -= 1
