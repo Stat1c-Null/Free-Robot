@@ -8,6 +8,7 @@ walk_speed = 12
 state = pState.normal
 hooked = false
 
+
 //Stamina
 global.phealth = 80
 global.phealth_max = 100
@@ -18,6 +19,8 @@ global.dash_stamina_max = 10
 global.hook_stamina = 7
 global.hook_stamina_max = 7
 global.jumpthru = false
+global.ammo_limit = 100
+global.ammo_limit_max = 150
 
 //Jumping
 jumpspd = 16

@@ -82,7 +82,7 @@
   "nineSlice": null,
   "parent": {
     "name": "Vending Machines",
-    "path": "folders/Sprites/Props/Vending Machines.yy",
+    "path": "folders/Sprites/Pick Up Objects/Vending Machines.yy",
   },
   "resourceVersion": "1.0",
   "name": "s_energy_vending_machine",

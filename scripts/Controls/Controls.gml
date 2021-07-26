@@ -7,6 +7,6 @@ function Controls(){
 	key_up = keyboard_check(ord("W"))
 	key_jump = keyboard_check_pressed(ord("W"))
 	key_dash = keyboard_check_pressed(vk_shift)
-	key_hook = mouse_check_button_pressed(mb_left)
+	key_hook = keyboard_check_pressed(vk_alt)
 	global.key_use = keyboard_check_pressed(ord("E"))
 }

@@ -24,8 +24,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Others",
-    "path": "folders/Objects/Others.yy",
+    "name": "Behind Scene",
+    "path": "folders/Objects/Behind Scene.yy",
   },
   "resourceVersion": "1.0",
   "name": "o_camera",

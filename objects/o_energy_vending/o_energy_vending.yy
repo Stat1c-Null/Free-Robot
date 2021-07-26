@@ -28,7 +28,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Vending",
-    "path": "folders/Objects/Objects/Vending.yy",
+    "path": "folders/Objects/Pick Up/Vending.yy",
   },
   "resourceVersion": "1.0",
   "name": "o_energy_vending",
