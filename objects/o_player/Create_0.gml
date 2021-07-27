@@ -20,7 +20,9 @@ global.hook_stamina = 7
 global.hook_stamina_max = 7
 global.jumpthru = false
 global.ammo_limit = 100
-global.ammo_limit_max = 150
+global.ammo_limit_max = 400
+global.overheat = 0
+global.overheat_limit = 268
 
 //Jumping
 jumpspd = 16
@@ -32,7 +34,7 @@ jump_current = jump_max
 onground = false
 onwall = 0
 dust = 0
-grv_wall = 0.3//Gravity when player is on the wall
+grv_wall = 1.9//Gravity when player is on the wall
 hsp_wall_jump = 23//Speed at which we jump away from the wall horizontally
 vsp_wall_jump = -15
 wall_jump_delay = 0//dont allow player to jump up one wall

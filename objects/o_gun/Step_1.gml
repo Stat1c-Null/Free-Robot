@@ -17,12 +17,14 @@ if(not keyboard_check(ord("A")) and not keyboard_check(ord("W")) and not keyboar
 image_angle = point_direction(x,y, mouse_x, mouse_y)
 
 firingdelay -= 1//Delay bullet creation
+
 recoil = max(0, recoil - 1)
-if(mouse_check_button(mb_left) and (firingdelay < 0) and global.ammo_limit > 0)
+if(mouse_check_button(mb_left) and (firingdelay < 0) and global.ammo_limit > 0 and global.overheat < global.overheat_limit)
 {
 	recoil = 4
 	firingdelay = 5
 	global.ammo_limit -= 1
+	global.overheat += 5
 	//With applies code between curly brackets to whatever object is 
 	//in circle brackets instead of actually object where code is written
 	with (instance_create_layer(x,y,"Bullets", o_bullet))
@@ -32,6 +34,8 @@ if(mouse_check_button(mb_left) and (firingdelay < 0) and global.ammo_limit > 0)
 		direction = other.image_angle + random_range(-3, 3)
 		image_angle = direction
 	}
+} else if(not mouse_check_button(mb_left) and global.overheat > 0){
+	global.overheat -= 1
 }
 //Move gun backwards with recoil
 x = x - lengthdir_x(recoil, image_angle)

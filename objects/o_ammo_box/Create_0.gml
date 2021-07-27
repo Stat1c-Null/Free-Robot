@@ -1,1 +1,1 @@
-ammo_refill = 100
+ammo_refill = 300
