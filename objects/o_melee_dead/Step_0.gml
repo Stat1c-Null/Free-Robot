@@ -1,8 +1,4 @@
 if(done == 0) {	
-	if(image_index == 16){
-		image_speed = 0
-		image_index = 16
-	}
 	vsp = vsp + grv
 
 	//Horizontal Collision

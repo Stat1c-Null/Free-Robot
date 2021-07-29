@@ -76,6 +76,7 @@
     {"id":{"name":"s_dust","path":"sprites/s_dust/s_dust.yy",},"order":0,},
     {"id":{"name":"o_gun","path":"objects/o_gun/o_gun.yy",},"order":3,},
     {"id":{"name":"s_smoke_trail","path":"sprites/s_smoke_trail/s_smoke_trail.yy",},"order":9,},
+    {"id":{"name":"sh_glow_roofs","path":"shaders/sh_glow_roofs/sh_glow_roofs.yy",},"order":1,},
     {"id":{"name":"s_hud_back","path":"sprites/s_hud_back/s_hud_back.yy",},"order":0,},
     {"id":{"name":"game_exit","path":"scripts/game_exit/game_exit.yy",},"order":4,},
     {"id":{"name":"s_hud_overheat","path":"sprites/s_hud_overheat/s_hud_overheat.yy",},"order":6,},

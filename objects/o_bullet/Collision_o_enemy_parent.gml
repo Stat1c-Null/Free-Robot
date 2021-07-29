@@ -3,6 +3,7 @@
 with (other) {
 	hp--
 	flash = 3
+	global.hitfrom = other.direction//Get current direction of a bullet
 } 
 
 instance_destroy()
