@@ -1,8 +1,8 @@
 {
   "type": 1,
   "parent": {
-    "name": "ProjectNeon",
-    "path": "ProjectNeon.yyp",
+    "name": "Shader",
+    "path": "folders/Shader.yy",
   },
   "resourceVersion": "1.0",
   "name": "sh_white_flash",
