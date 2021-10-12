@@ -23,17 +23,16 @@ if(place_meeting(x, y + vsp, o_wall))
 y = y + vsp
 
 //Animate 
-if(instance_exists(o_player))
+if(!place_meeting(x, y+1, o_wall))
 {
-	var distToPlayer = distance_to_object(o_player)
-	moveTowardPlayer = (distToPlayer <= followRange and distToPlayer >= minimumRange)
-	if(moveTowardPlayer) {
-		sprite_index = s_enemy_run
-		image_speed = 1
-		mp_potential_step(o_player.x, y, 10, false)
-	} else {
-		image_speed = 1
+	sprite_index = s_enemy_attack
+	image_speed = 0
+	if(sign(vsp) > 0) image_index = 1; else image_index = 0
+} else {
+	image_speed = 1
+	if(hsp == 0) {
 		sprite_index = s_enemy_idle	
+	} else {
+		sprite_index = s_enemy_run	
 	}
 }
-
