@@ -5,7 +5,10 @@
   },
   "solid": false,
   "visible": true,
-  "spriteMaskId": null,
+  "spriteMaskId": {
+    "name": "s_enemy_idle",
+    "path": "sprites/s_enemy_idle/s_enemy_idle.yy",
+  },
   "persistent": false,
   "parentObjectId": {
     "name": "o_enemy_parent",
