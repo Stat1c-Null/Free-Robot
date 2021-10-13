@@ -1,13 +1,15 @@
 vsp = 0 
-hsp = 0
 grv = 0.5
-walkspd = 4
-
-global.hitfrom = 0
+walkspd = 5
+chasespd = 10
+hsp = 0
+hitfrom = 0
 hp = 10
 flash = 0
 
 moveTowardPlayer = false
-followRange = 4000
-minimumRange = sprite_width
+followRange = 1000
+minimumRange = sprite_width - 150
+dir = 0
+
 

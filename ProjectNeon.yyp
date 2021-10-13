@@ -104,6 +104,7 @@
     {"id":{"name":"jump_thr_collisions","path":"scripts/jump_thr_collisions/jump_thr_collisions.yy",},"order":0,},
     {"id":{"name":"o_building1","path":"objects/o_building1/o_building1.yy",},"order":0,},
     {"id":{"name":"acceleration","path":"scripts/acceleration/acceleration.yy",},"order":0,},
+    {"id":{"name":"s_enemy_walk","path":"sprites/s_enemy_walk/s_enemy_walk.yy",},"order":4,},
     {"id":{"name":"fnt_text","path":"fonts/fnt_text/fnt_text.yy",},"order":3,},
     {"id":{"name":"o_jump_vending","path":"objects/o_jump_vending/o_jump_vending.yy",},"order":0,},
     {"id":{"name":"s_bg_sky","path":"sprites/s_bg_sky/s_bg_sky.yy",},"order":0,},
