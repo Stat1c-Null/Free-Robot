@@ -14,6 +14,7 @@ if(inputting){
 			var hinput = keyboard_check_pressed(global.key_right) - keyboard_check_pressed(global.key_left);
 			if(hinput != 0){
 				//audio
+				audio_play_sound(snd_ui1, 3, false)
 				ds_[# 3, menu_option[page]] += hinput;
 				ds_[# 3, menu_option[page]] = clamp(ds_[# 3, menu_option[page]], 0, array_length_1d(ds_[# 4, menu_option[page]])-1);
 			}
@@ -28,6 +29,7 @@ if(inputting){
 			}
 			var hinput = keyboard_check(global.key_right) - keyboard_check(global.key_left);
 			if(hinput != 0){
+				audio_play_sound(snd_ui1, 3, false)
 				ds_[# 3, menu_option[page]] += hinput*0.01;
 				ds_[# 3, menu_option[page]] = clamp(ds_[# 3, menu_option[page]], 0, 1);
 				script_execute(ds_[# 2, menu_option[page]], ds_[# 3, menu_option[page]]);
@@ -39,6 +41,7 @@ if(inputting){
 		var hinput = keyboard_check_pressed(global.key_right) - keyboard_check_pressed(global.key_left);
 			if(hinput != 0){
 				//audio
+				audio_play_sound(snd_ui1, 3, false)
 				ds_[# 3, menu_option[page]] += hinput;
 				ds_[# 3, menu_option[page]] = clamp(ds_[# 3, menu_option[page]], 0, 1);
 			}
@@ -47,6 +50,7 @@ if(inputting){
 		case menu_element_type.input:
 		var kk = keyboard_lastkey;
 		if(kk != vk_enter){
+			audio_play_sound(snd_ui1, 3, false)
 			if(kk != ds_[# 3, menu_option[page]]) //audio
 			ds_[# 3, menu_option[page]] = kk;
 			variable_global_set(ds_[# 2, menu_option[page]], kk);
@@ -58,6 +62,7 @@ if(inputting){
 } else {
 	var ochange = input_down_p - input_up_p;
 	if(ochange != 0){
+		audio_play_sound(snd_ui1, 3, false)
 		menu_option[page] += ochange;
 		if(menu_option[page] > ds_height-1) { menu_option[page] = 0; }
 		if(menu_option[page] < 0) { menu_option[page] = ds_height-1; }
@@ -66,6 +71,7 @@ if(inputting){
 }
 
 if(input_enter_p){
+	audio_play_sound(snd_ui2, 3, false)
 	switch(ds_[# 1, menu_option[page]]){
 		case menu_element_type.script_runner: script_execute(ds_[# 2, menu_option[page]]); break;
 		case menu_element_type.page_transfer: page = ds_[# 2, menu_option[page]]; break;

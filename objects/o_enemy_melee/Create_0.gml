@@ -8,7 +8,7 @@ hp = 10
 flash = 0
 
 moveTowardPlayer = false
-followRange = 500
+followRange = 200
 minimumRange = sprite_width - 150
 dir = 0
 

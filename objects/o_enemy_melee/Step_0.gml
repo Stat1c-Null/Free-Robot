@@ -8,7 +8,7 @@ if(place_meeting(x + hsp, y, o_wall))
 	{
 		x = x + sign(hsp)
 	}
-	hsp = -hsp 
+	hsp = -hsp  
 }
 x = x + hsp 
 

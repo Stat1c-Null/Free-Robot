@@ -27,6 +27,8 @@ switch (state)
 					sprite_index = s_player_idle
 				} else {//Running sprite
 					sprite_index = s_player_running
+					//audio_play_sound(snd_player_move1, 2, false)
+					//
 				}
 				FlipImage()
 			} else {
@@ -79,6 +81,7 @@ switch (state)
 					if(onwall == 0){
 						global.jump_stamina -= 1
 					}
+					audio_play_sound(snd_player_doublejump, 2, false)//BIG BIG BUG
 					//Animate Jump
 					sprite_index = s_player_jump
 					image_speed = 1
@@ -157,6 +160,7 @@ switch (state)
 		//Dash
 		if(key_dash and !key_up and is_dashing == false and global.dash_stamina > 0 and dash_current > 0) {
 			is_dashing = true
+			audio_play_sound(snd_player_dash, 2, false)
 			dash_current -= 1
 			sprite_index = s_player_dash
 			global.dash_stamina -= 1
@@ -190,11 +194,13 @@ switch (state)
 		}
 		//Check if we are clicking mouse
 		if(key_hook and global.hook_stamina > 0){
+			audio_play_sound(snd_player_hook, 2, false)
 			//Find distance between player and place they want to grapple on
 			dist = point_distance(o_player.x, o_player.y, mouse_x, mouse_y)
 			//Check if player is trying to grapple with a wall and their arent too far away
 			if((place_meeting(mouse_x, mouse_y, o_jumpthroughplatform) or place_meeting(mouse_x, mouse_y, o_wall)) and (dist < distance_toHook))
 			{
+				audio_play_sound(snd_player_hooked, 2, false)
 				sprite_index = s_player_fall
 				show_debug_message("Test")
 				global.hook_stamina -= 1
