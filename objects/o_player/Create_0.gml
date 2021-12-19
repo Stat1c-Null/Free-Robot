@@ -10,7 +10,7 @@ hooked = false
 
 
 //Stamina
-global.phealth = 80
+global.phealth = 100
 global.phealth_max = 100
 global.jump_stamina = 12
 global.jump_stamina_max = 12

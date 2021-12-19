@@ -1,0 +1,9 @@
+	
+	//Ammo Limit
+	draw_text(20, 300, "AMMO")
+	draw_sprite(s_hud_back, 1, 20, 314)
+	draw_sprite_ext(s_hud_ammo, 1, 20, 314, max(0, global.ammo_limit/global.ammo_limit_max), 1, 0, c_white,1)
+	//Overheat
+	draw_text(20, 370, "WEAPON HEAT")
+	draw_sprite(s_hud_back, 1, 20, 384)
+	draw_sprite_part_ext(s_hud_overheat, 1, 0, 0, global.overheat, 38, 20, 384, 1, 1, c_white, 1)

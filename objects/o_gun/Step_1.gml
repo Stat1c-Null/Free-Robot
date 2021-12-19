@@ -25,6 +25,8 @@ if(mouse_check_button(mb_left) and (firingdelay < 0) and global.ammo_limit > 0 a
 	firingdelay = 5
 	global.ammo_limit -= 1
 	global.overheat += 5
+	//Shoot sound
+	audio_play_sound(snd_player_shoot, 1, false)
 	//With applies code between curly brackets to whatever object is 
 	//in circle brackets instead of actually object where code is written
 	with (instance_create_layer(x,y,"Bullets", o_bullet))

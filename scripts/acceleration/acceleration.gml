@@ -12,6 +12,7 @@ function acceleration(argument0, argument1, argument2){
 	{
 		hsp = lerp(hsp, userMaxHsp*keyPressed, accel)
 		
+		
 	} else {
 		hsp = lerp(hsp, 0, deccel)	
 	}
