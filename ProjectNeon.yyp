@@ -21,6 +21,7 @@
     {"id":{"name":"s_leg_back","path":"sprites/s_leg_back/s_leg_back.yy",},"order":1,},
     {"id":{"name":"s_energy_vending_machine","path":"sprites/s_energy_vending_machine/s_energy_vending_machine.yy",},"order":2,},
     {"id":{"name":"s_energyBarBack","path":"sprites/s_energyBarBack/s_energyBarBack.yy",},"order":10,},
+    {"id":{"name":"s_final_health","path":"sprites/s_final_health/s_final_health.yy",},"order":0,},
     {"id":{"name":"o_building8","path":"objects/o_building8/o_building8.yy",},"order":7,},
     {"id":{"name":"snd_wall_hit4","path":"sounds/snd_wall_hit4/snd_wall_hit4.yy",},"order":3,},
     {"id":{"name":"change_volume","path":"scripts/change_volume/change_volume.yy",},"order":1,},
@@ -64,6 +65,7 @@
     {"id":{"name":"o_enemy_parent","path":"objects/o_enemy_parent/o_enemy_parent.yy",},"order":2,},
     {"id":{"name":"o_building4","path":"objects/o_building4/o_building4.yy",},"order":3,},
     {"id":{"name":"s_dagger","path":"sprites/s_dagger/s_dagger.yy",},"order":6,},
+    {"id":{"name":"s_final_back_health","path":"sprites/s_final_back_health/s_final_back_health.yy",},"order":1,},
     {"id":{"name":"o_building3","path":"objects/o_building3/o_building3.yy",},"order":2,},
     {"id":{"name":"s_gun","path":"sprites/s_gun/s_gun.yy",},"order":7,},
     {"id":{"name":"o_topwall2Pipe3","path":"objects/o_topwall2Pipe3/o_topwall2Pipe3.yy",},"order":2,},
@@ -246,6 +248,7 @@
     {"folderPath":"folders/Sounds/Player/Walls.yy","order":3,"resourceVersion":"1.0","name":"Walls","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Sounds/Player/Skills.yy","order":4,"resourceVersion":"1.0","name":"Skills","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Sprites/Effects.yy","order":7,"resourceVersion":"1.0","name":"Effects","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Sprites/HUD/Nice looking Hud.yy","order":13,"resourceVersion":"1.0","name":"Nice looking Hud","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},

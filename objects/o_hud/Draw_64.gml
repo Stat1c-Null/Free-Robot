@@ -3,8 +3,9 @@ draw_set_font(fnt_text)
 
 if(instance_exists(o_player)){
 	//Health
-	draw_sprite(s_healthbarBack, 1, 30, 50)
-	draw_sprite_ext(s_healthbarFront, 1, 96, 49, max(0, global.phealth/global.phealth_max), 1, 0, c_white,1)
+	draw_sprite_ext(s_final_health, 1, 96, 49, max(0, global.phealth/global.phealth_max), 1, 0, c_white,1)
+	draw_sprite(s_final_back_health, 1, 68, 45)
+	
 	//Dash Stamina
 	draw_sprite(s_energyBarBack, 1, 30, 120)
 	draw_sprite_ext(s_energybarFront, 1, 96, 119, max(0, global.dash_stamina/global.dash_stamina_max), 1, 0, c_white,1)
